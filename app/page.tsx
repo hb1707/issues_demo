@@ -1,95 +1,41 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import {Button, Form} from "@douyinfe/semi-ui";
 
 export default function Home() {
+  const initValues = {
+    name: 'semi',
+    shortcut: 'se'
+  };
+
+  const style = { width: '100%' };
+
+  const { Select, Input } = Form;
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+      <Form initValues={initValues}>
+        <Input
+            field="name"
+            style={style}
+            trigger='blur'
+            rules={[
+              { required: true, message: 'required error' },
+              { type: 'string', message: 'type error' },
+              { validator: (rule, value) => value === 'semi', message: 'should be semi' },
+              { validator: (rule, value) => value && value.startsWith('se'), message: 'should startsWith se' }
+            ]}
         />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+        <Input
+            field="shortcut"
+            style={style}
+            stopValidateWithError
+            rules={[
+              { required: true, message: 'required error' },
+              { type: 'string', message: 'type error' },
+              { validator: (rule, value) => value === 'semi', message: 'should be semi' },
+              { validator: (rule, value) => value && value.startsWith('se'), message: 'should startsWith se' }
+            ]}
+        />
+        <Button htmlType='submit'>提交</Button>
+      </Form>
   );
 }
